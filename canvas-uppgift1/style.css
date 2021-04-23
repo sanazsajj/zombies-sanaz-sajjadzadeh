@@ -1,0 +1,22 @@
+body { /*Ändrar bakgrundsfärgen till svart*/
+    background-color: black;
+}
+
+h1 { /*Ändrar storleken och färgen på headern och sätter den i mitten av skärmen*/
+    color: red;
+    font-size: 100px;
+    text-align: center;
+}
+
+a { /*Ändrar färgen och storleken på länken och sätter den under headern*/
+    font-size: 35px;
+    color: red;
+    text-decoration: none;
+    position: relative;
+    margin: 550px;
+    top: 250px;
+}
+
+a:hover { /*Gör så att länken understryks när musen är över den*/
+    text-decoration: underline;
+}

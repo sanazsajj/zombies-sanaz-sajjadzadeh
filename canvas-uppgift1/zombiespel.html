@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://spelprogrammering.nu/simple.js">
+    
+        var zombies = []; /*Skapar en tom lista*/
+
+        var i = 0; /*Skapar en räkningsvariabel som bestämmer hur många varv en loop ska göra*/
+
+        while (i < 10) /*Skapar en loop som loopar så länge i är mindre än 10*/
+        {
+            zombies.push({x: random(totalWidth), /*Lägger in en zombie i listan*/
+                        y: random(totalHeight),
+                        speed: random(1,5)});
+            i += 1; /*Ökar räkningsvariabeln med 1 tills loopen inte är sann längre*/
+        }
+
+        var zombie = {
+            x: random(totalWidth), /*Skapar en variabel för zombies och sätter x och y koordinater som slumpmässiga.*/
+            y: random(totalHeight),
+            speed: random(1,5)}; /*Sätter hastigheten som slumpmässig mellan 1-5.*/
+
+        function update()
+        {
+            clearScreen(); /*Rensar skärmen för att inte få något lagg.*/
+            fill("black") /*Ändrar bakgrundsfärgen till svart*/
+            text(20, 30, 10, "Sluta spela genom att trycka på mellanslag", "white") /*Lägger till text på skärmen*/
+            hideMouse(); /*Gömmer muspekaren*/
+            picture(mouse.x, mouse.y, "rsz_1rsz_heart-removebg-preview.png"); /*Byter bild på muspekaren*/
+
+            var i = 0; /*Skapar en räkningsvariabel*/
+        
+            while (i < 10) /*Skapar en loop som är sann så länge i är mindre än 10*/
+            {
+                var zombie = zombies[i]; /*Skapar en variabel som ska hämta alla zombies*/
+
+                picture(zombie.x, zombie.y, "rsz_zombie-removebg-preview.png"); /*Byter bild på zombie*/
+                
+                /*If-satser för att få zombien att följa efter musen*/
+                if (zombie.x < mouse.x)
+                    zombie.x += zombie.speed; /*Gör så att zombien rör sig till höger mot musen om den är till vänster om musen.*/
+                else
+                    zombie.x -= zombie.speed; /*Gör så att zombien rör sig till vänster mot musen om den är till höger om musen.*/
+            
+                if (zombie.y < mouse.y)
+                    zombie.y += zombie.speed; /*Gör så att zombien rör sig mot musen om den är över musen.*/
+                else
+                    zombie.y -= zombie.speed; /*Gör så att zombien rör sig mot musen om den är under musen.*/
+                
+                if (keyboard.space) {  /*If-sats för vad som händer om man trycker på mellanslag*/
+                stopUpdate(); /*Spelet stoppas*/
+                showMouse(); /*Musen visas*/
+                text(400, 250, 60, "Game over!", "red"); /*Lägger till text som säger Game over!*/
+            } 
+
+                if (distance(mouse, zombie) < 10) /*If-sats för vad som händer om avståndet mellan zombien och musen blir mindre*/
+            {
+                text(400, 250, 60, "Game over!", "red"); /*Lägger till text som säger Game over!*/
+                showMouse(); /*Musen visas*/
+                stopUpdate(); /*Spelet stoppas*/
+            }
+            i += 1 /*Ökar räkningsvariabeln med 1 tills loopen inte är sann längre*/
+            }
+        }
+        
+    </script>
+</body>
+</html>
